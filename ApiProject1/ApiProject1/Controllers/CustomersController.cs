@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ApiProject1.Models;
@@ -85,6 +86,27 @@ namespace ApiProject1.Controllers
             return CreatedAtRoute("DefaultApi", new { id = customer.Id }, customer);
         }
 
+        // POST: api/Login
+        [Route("api/Login")]
+        [ResponseType(typeof(Customer))]
+        public IHttpActionResult Login(Login login)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            foreach(var n in db.Customers)
+            {
+                if(n.UserName == login.UserName && n.Password == login.Password)
+                {
+                    Console.WriteLine("logged in OK as " + n.UserName);
+                    return Ok("true");
+                }
+            }
+            return Unauthorized();
+        }
+        
         // DELETE: api/Customers/5
         [ResponseType(typeof(Customer))]
         public IHttpActionResult DeleteCustomer(int id)
