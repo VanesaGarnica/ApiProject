@@ -91,7 +91,7 @@ namespace ApiProject1.Controllers
 
         // POST: api/Login
         [Route("api/Login")]
-        [ResponseType(typeof(Customer))]
+        [ResponseType(typeof(StringResult))]
         public IHttpActionResult Login(Login login)
         {
             if (!ModelState.IsValid)
@@ -108,7 +108,8 @@ namespace ApiProject1.Controllers
                 if(n.UserName == login.UserName && n.Password == login.Password)
                 {
                     Console.WriteLine("logged in OK as " + n.UserName);
-                    return Ok("true");
+                    var result = new StringResult("true", "Login correct");
+                    return Ok(result);
                 }
             }
             return Unauthorized();
@@ -116,7 +117,7 @@ namespace ApiProject1.Controllers
 
         // POST: api/Add
         [Route("api/Add")]
-        [ResponseType(typeof(Customer))]
+        [ResponseType(typeof(IntegerResult))]
         public IHttpActionResult FunctionThatAccessesSOAP(TwoIntegers integers)
         {
             if (!ModelState.IsValid)
