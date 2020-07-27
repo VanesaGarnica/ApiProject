@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,6 +11,7 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ApiProject1.CalculatorService;
+using ApiProject1.DilbertService;
 using ApiProject1.Models;
 
 namespace ApiProject1.Controllers
@@ -125,6 +127,23 @@ namespace ApiProject1.Controllers
             var client = new CalculatorSoapClient();
             int resultInt = client.Add(integers.int1, integers.int2);
             var result = new IntegerResult(resultInt, "Operation Succesful");
+            return Ok(result);
+        }
+        [Route("api/Dilbert")]
+        [ResponseType(typeof(Customer))]
+        public IHttpActionResult FunctionDilbert(Date date )
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var client = new DilbertSoapClient();
+            DateTime fecha = new DateTime(date.year, date.month, date.day);
+            Debug.WriteLine("probando");
+            string resultString = client.DailyDilbert(fecha);
+            Debug.WriteLine(resultString);
+            var result = new StringResult(resultString, "Operation Succesful");
             return Ok(result);
         }
 

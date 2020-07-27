@@ -168,9 +168,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\DilbertService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\Date.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntegerResult.cs" />
+    <Compile Include="Controllers\StringResult.cs" />
     <Compile Include="Controllers\TwoIntegers.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -204,6 +211,19 @@
     <None Include="Connected Services\CalculatorService\configuration91.svcinfo" />
     <None Include="Connected Services\CalculatorService\configuration.svcinfo" />
     <None Include="Connected Services\CalculatorService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\DilbertService\ApiProject1.DilbertService.DailyDilbertResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\DilbertService\ApiProject1.DilbertService.TodaysDilbertResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\DilbertService\dilbert.disco" />
+    <None Include="Connected Services\DilbertService\configuration91.svcinfo" />
+    <None Include="Connected Services\DilbertService\configuration.svcinfo" />
+    <None Include="Connected Services\DilbertService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -253,6 +273,7 @@
       <DependentUpon>DB.edmx</DependentUpon>
     </Content>
     <None Include="Connected Services\CalculatorService\calculator.wsdl" />
+    <None Include="Connected Services\DilbertService\dilbert.wsdl" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -314,6 +335,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\CalculatorService\" />
+    <WCFMetadataStorage Include="Connected Services\DilbertService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
