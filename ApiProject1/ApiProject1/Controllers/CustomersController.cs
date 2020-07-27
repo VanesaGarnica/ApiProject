@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ApiProject1.CalculatorService;
 using ApiProject1.Models;
 
 namespace ApiProject1.Controllers
@@ -95,8 +96,12 @@ namespace ApiProject1.Controllers
             {
                 return BadRequest(ModelState);
             }
+            if (string.IsNullOrEmpty( login.Password) || string.IsNullOrEmpty(login.UserName))
+            {
+                return StatusCode(HttpStatusCode.NotAcceptable);
+            }
 
-            foreach(var n in db.Customers)
+            foreach (var n in db.Customers)
             {
                 if(n.UserName == login.UserName && n.Password == login.Password)
                 {
@@ -106,7 +111,23 @@ namespace ApiProject1.Controllers
             }
             return Unauthorized();
         }
-        
+
+        // POST: api/Add
+        [Route("api/Add")]
+        [ResponseType(typeof(Customer))]
+        public IHttpActionResult FunctionThatAccessesSOAP(TwoIntegers integers)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var client = new CalculatorSoapClient();
+            int resultInt = client.Add(integers.int1, integers.int2);
+            var result = new IntegerResult(resultInt, "Operation Succesful");
+            return Ok(result);
+        }
+
         // DELETE: api/Customers/5
         [ResponseType(typeof(Customer))]
         public IHttpActionResult DeleteCustomer(int id)
